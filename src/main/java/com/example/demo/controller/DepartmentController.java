@@ -35,4 +35,9 @@ public class DepartmentController {
     public void updateDepartment(Department department){
         departmentMapper.updateDepartment(department);
     }
+
+    @RequestMapping("findDepartmentByName")
+    public Department findDepartmentByName(String department_name){
+        return departmentMapper.findDepartmentByName(department_name);
+    }
 }
