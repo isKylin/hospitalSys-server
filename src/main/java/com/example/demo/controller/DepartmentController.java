@@ -1,43 +1,43 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Department;
-import com.example.demo.mapper.DepartmentMapper;
-import lombok.extern.slf4j.Slf4j;
+import com.example.demo.service.DepartmentService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Slf4j
 @RestController
+@RequestMapping("department")
 public class DepartmentController {
 
     @Autowired
-    private DepartmentMapper departmentMapper;
+    private DepartmentService departmentService;
 
 
     @RequestMapping("findAllDepartment")
     public List<Department> findAllDepartment(){
-        return departmentMapper.findAllDepartment();
+        return departmentService.findAllDepartment();
     }
 
     @RequestMapping("insertDepartment")
     public void insertDepartment(Department department){
-        departmentMapper.InsertDepartment(department);
+        departmentService.insertDepartment(department);
     }
 
     @RequestMapping("deleteDepartmentByName/{department_name}")
-    public int deleteDepartmentByName(@PathVariable String department_name){
-        return departmentMapper.deleteDepartmentByName(department_name);
+    public int deleteDepartmentByName(String department_name){
+        return departmentService.deleteDepartmentByName(department_name);
     }
 
     @RequestMapping("updateDepartment/{department_id}")
     public void updateDepartment(Department department){
-        departmentMapper.updateDepartment(department);
+        departmentService.updateDepartment(department);
     }
 
-    @RequestMapping("findDepartmentByName")
-    public Department findDepartmentByName(String department_name){
-        return departmentMapper.findDepartmentByName(department_name);
+    @RequestMapping("findDepartmentByName/{department_name}")
+    public Department finDepartmentByName(String department_name){
+        return departmentService.finDepartmentByName(department_name);
     }
 }
