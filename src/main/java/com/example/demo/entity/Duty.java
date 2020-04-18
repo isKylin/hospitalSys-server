@@ -8,4 +8,6 @@ public class Duty {
     private String duty_class;
     private String doctor_name;
     private String duty_time;
+    private String duty_date;
+    private int duty_appointment;
 }
