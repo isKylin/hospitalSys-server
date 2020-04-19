@@ -28,5 +28,5 @@ public class AppointmentDTO {
     private Integer appointmentRegisteredCount;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date appointmentData;
+    private Date appointmentDate;
 }

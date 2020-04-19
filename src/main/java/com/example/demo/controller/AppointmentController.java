@@ -23,12 +23,12 @@ public class AppointmentController {
 
     /**
      * 新增预约信息
-     *
      * @param appointment 预约实体信息
      * @return Result
      */
     @PostMapping(value = "create")
     public Result appointmentCreate(@RequestBody Appointment appointment) {
+        
         int num = appointmentService.createAppointment(appointment);
         Result result = new Result();
         if (num > 0) {
@@ -89,13 +89,11 @@ public class AppointmentController {
     }
 
     /**
-     * 根据关键字查询获得题目信息集合
-     * @author currysss
-     * @date 2019/10/23 18:33
+     * 根据关键字查询获得预约信息集合
      * @param keyword 关键字
      * @param pageNum 页面数
      * @param pageSize 每页含有的数据数量
-     * @return Map<Object, Object>
+     * @return Result
      */
     @ResponseBody
     @PostMapping(value = "/appointmentList")
