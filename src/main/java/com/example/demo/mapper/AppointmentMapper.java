@@ -55,7 +55,7 @@ public interface AppointmentMapper {
     /**
      * 根据关键字模糊查询预约信息列表
      * @param keyword 关键字
-     * @return List<Appointment>
+     * @return List<AppointmentDTO>
      */
     @Select("select a.appointment_id, a.department_id, d.department_name, a.doctor_id, o.doctor_name, " +
             "a.appointment_count, a.appointment_registered_count, a.appointment_date " +

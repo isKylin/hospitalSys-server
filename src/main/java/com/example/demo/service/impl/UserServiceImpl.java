@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.dto.UserDTO;
 import com.example.demo.entity.User;
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.service.UserService;
@@ -29,5 +30,10 @@ public class UserServiceImpl implements UserService {
             e.printStackTrace();
             return 0;
         }
+    }
+
+    @Override
+    public UserDTO userLogin(String userName, String userPassword) {
+        return userMapper.userLogin(userName, userPassword);
     }
 }

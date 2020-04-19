@@ -1,12 +1,10 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.UserDTO;
 import com.example.demo.entity.Result;
 import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -16,6 +14,22 @@ public class CommonController {
     @Resource
     private UserService userService;
 
+    @RequestMapping(value = "login",method = RequestMethod.POST)
+    public Result userLogin(@RequestParam(value = "userName")String userName,
+                            @RequestParam(value = "userPassword")String userPassword) {
+        UserDTO userDTO = userService.userLogin(userName, userPassword);
+        Result result = new Result();
+        if (userDTO != null) {
+            result.setCode(200);
+            result.setMessage("登录成功");
+            result.setData(userDTO);
+            return result;
+        } else {
+            result.setCode(500);
+            result.setMessage("登录失败");
+            return result;
+        }
+    }
     @RequestMapping(value = "register",method = RequestMethod.POST)
     public Result registerUser(@RequestBody User user) {
         int num = userService.userRegister(user);
