@@ -33,13 +33,14 @@ public class BlacklistController {
         }
     }
 
-    @RequestMapping(value = "find",method = RequestMethod.GET)
+    @RequestMapping(value = "find",method = RequestMethod.POST)
     public Result listBlacklist() {
         List<Blacklist> blacklistList = blacklistService.blacklistList();
         Result result = new Result();
         if (blacklistList != null) {
             result.setCode(200);
             result.setMessage("查询成功");
+            result.setData(blacklistList);
             return result;
         } else {
             result.setCode(500);

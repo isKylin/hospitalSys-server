@@ -64,13 +64,14 @@ public class DoctorController {
         }
     }
 
-    @RequestMapping(value = "find",method = RequestMethod.GET)
+    @RequestMapping(value = "find",method = RequestMethod.POST)
     public Result listDoctor() {
         List<Doctor> doctorList = doctorService.doctorList();
         Result result = new Result();
         if (doctorList != null) {
             result.setCode(200);
             result.setMessage("查询成功");
+            result.setData(doctorList);
             return result;
         } else {
             result.setCode(500);

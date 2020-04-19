@@ -18,13 +18,14 @@ public class DutyController {
     @Resource
     private DutyService dutyService;
 
-    @RequestMapping(value = "find",method = RequestMethod.GET)
+    @RequestMapping(value = "find",method = RequestMethod.POST)
     public Result listDuty() {
         List<Duty> dutyList = dutyService.findAllDuty();
         Result result = new Result();
         if (dutyList != null) {
             result.setCode(200);
             result.setMessage("查询成功");
+            result.setData(dutyList);
             return result;
         } else {
             result.setCode(500);

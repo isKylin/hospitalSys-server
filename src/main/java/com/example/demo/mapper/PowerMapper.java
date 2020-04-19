@@ -15,7 +15,7 @@ public interface PowerMapper {
      * @param user 用户实体信息
      * @return int
      */
-    @Update("update user_info set user_role = #{userRole}")
+    @Update("update user_info set user_role = #{userRole} where user_id = #{userId}")
     int updatePower(User user);
 
     /**

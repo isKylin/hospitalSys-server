@@ -35,7 +35,7 @@ public interface DoctorMapper {
             "doctor_department = #{doctorDepartment}, doctor_sex = #{doctorSex}, " +
             "doctor_age = #{doctorAge}, doctor_position = #{doctorPosition}," +
             "doctor_phone = #{doctorPhone}, doctor_speciality = #{doctorSpeciality}," +
-            "doctor_achievement = #{doctorAchievement} where department_id = #{departmentId}")
+            "doctor_achievement = #{doctorAchievement} where doctor_id = #{doctorId}")
     int updateDoctor(Doctor doctor);
 
     /**

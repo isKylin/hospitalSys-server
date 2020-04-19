@@ -83,13 +83,14 @@ public class DepartmentController {
      *
      * @return List<Department>
      */
-    @RequestMapping(value = "find",method = RequestMethod.GET)
+    @RequestMapping(value = "find",method = RequestMethod.POST)
     public Result listDepartment() {
         List<Department> departmentList = departmentService.departmentList();
         Result result = new Result();
         if (departmentList != null) {
             result.setCode(200);
             result.setMessage("查询成功");
+            result.setData(departmentList);
             return result;
         } else {
             result.setCode(500);

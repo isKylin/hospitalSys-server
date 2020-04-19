@@ -34,13 +34,14 @@ public class PowerController {
         }
     }
 
-    @RequestMapping(value = "find",method = RequestMethod.GET)
+    @RequestMapping(value = "find",method = RequestMethod.POST)
     public Result listPower() {
         List<User> userList = powerService.powerList();
         Result result = new Result();
         if (userList != null) {
             result.setCode(200);
             result.setMessage("查询成功");
+            result.setData(userList);
             return result;
         } else {
             result.setCode(500);
