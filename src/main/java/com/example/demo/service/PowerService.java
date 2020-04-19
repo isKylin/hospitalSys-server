@@ -5,6 +5,6 @@ import com.example.demo.entity.User;
 import java.util.List;
 
 public interface PowerService {
-    List<User> findAllPower();
-    void updateUserPower(User user);
+    int updatePower(User user);
+    List<User> powerList();
 }

@@ -9,11 +9,19 @@ import java.util.List;
 
 @Mapper
 public interface BlacklistMapper {
-    // 查询所有黑名单信息
-    @Select("select * from blacklist_info")
-    List<Blacklist> findAllBlacklist();
-    // 添加黑名单
+    /**
+     * 新增黑名单信息
+     * @param blacklist 黑名单实体信息
+     * @return int
+     */
     @Insert("insert into blacklist_info(patient_name,blacklist_reason)" +
-            "values(#{patient_name},#{blacklist_reason})")
-    void insertBlacklist(Blacklist blacklist);
+            "values(#{patientName},#{blacklistReason})")
+    int createBlacklist(Blacklist blacklist);
+
+    /**
+     * 查询所有信息
+     * @return List<Doctor>
+     */
+    @Select("select * from doctor_info")
+    List<Blacklist> blacklistList();
 }

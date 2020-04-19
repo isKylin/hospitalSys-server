@@ -1,6 +1,5 @@
 package com.example.demo.mapper;
 
-import com.example.demo.entity.Department;
 import com.example.demo.entity.Doctor;
 import org.apache.ibatis.annotations.*;
 
@@ -8,30 +7,41 @@ import java.util.List;
 
 @Mapper
 public interface DoctorMapper {
-    // 查询所有医生信息
-    @Select("select * from doctor_info;")
-    List<Doctor> findAllDoctor();
-
-    // 添加医生信息
+    /**
+     * 新增医生信息
+     * @param doctor 医生实体信息
+     * @return int
+     */
     @Insert("insert into doctor_info(doctor_name,doctor_department,doctor_sex,doctor_age,doctor_position," +
             "doctor_phone,doctor_speciality,doctor_achievement)" +
-            "values(#{doctor_name},#{doctor_department},#{doctor_sex},#{doctor_age},#{doctor_position}," +
-            "#{doctor_phone},#{doctor_speciality},#{doctor_achievement})")
-    void insertDoctor(Doctor doctor);
+            "values(#{doctorName},#{doctorDepartment},#{doctorSex},#{doctorAge},#{doctorPosition}," +
+            "#{doctorPhone},#{doctorSpeciality},#{doctorAchievement})")
+    int createDoctor(Doctor doctor);
 
-    // 删除医生信息
-    @Delete("delete from doctor_info where doctor_name = #{doctor_name};")
-    int deleteDoctorByName(String doctor_name);
+    /**
+     * 删除医生信息
+     * @param doctorId 医生编号
+     * @return int
+     */
+    @Delete("delete from doctor_info where doctor_id = #{doctorId};")
+    int deleteDoctor(@Param("doctorId") Integer doctorId);
 
-    // 修改医生信息
-    @Update("update doctor_info set doctor_name = #{doctor_name}," +
-            "doctor_department = #{doctor_department}, doctor_sex = #{doctor_sex}, " +
-            "doctor_age = #{doctor_age}, doctor_position = #{doctor_position}," +
-            "doctor_phone = #{doctor_phone}, doctor_speciality = #{doctor_speciality}," +
-            "doctor_achievement = #{doctor_achievement} where department_id = #{department_id}")
-    void updateDoctor(Doctor doctor);
-    
-    // 根据医生名字查询医生信息
-    @Select("select * from doctor_info where doctor_name = #{doctor_name}")
-    Doctor findDoctorByName(String doctor_name);
+    /**
+     * 修改医生信息
+     * @param doctor 医生实体信息
+     * @return int
+     */
+    @Update("update doctor_info set doctor_name = #{doctorName}," +
+            "doctor_department = #{doctorDepartment}, doctor_sex = #{doctorSex}, " +
+            "doctor_age = #{doctorAge}, doctor_position = #{doctorPosition}," +
+            "doctor_phone = #{doctorPhone}, doctor_speciality = #{doctorSpeciality}," +
+            "doctor_achievement = #{doctorAchievement} where department_id = #{departmentId}")
+    int updateDoctor(Doctor doctor);
+
+    /**
+     * 查询所有信息
+     * @return List<Doctor>
+     */
+    @Select("select * from doctor_info")
+    List<Doctor> doctorList();
 }

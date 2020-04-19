@@ -1,41 +1,81 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.Department;
 import com.example.demo.entity.Doctor;
+import com.example.demo.entity.Result;
 import com.example.demo.service.DoctorService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.List;
 
-@RestController
 @RequestMapping("doctor")
+@RestController
 public class DoctorController {
-    @Autowired
+
+    @Resource
     private DoctorService doctorService;
 
-    @RequestMapping("findAllDoctor")
-    public List<Doctor> findAllDoctor(){
-        return doctorService.findAllDoctor();
+    @RequestMapping(value = "create",method = RequestMethod.POST)
+    public Result doctorCreate(@RequestBody Doctor doctor) {
+        int num = doctorService.createDoctor(doctor);
+        Result result = new Result();
+        if (num > 0) {
+            result.setCode(200);
+            result.setMessage("插入数据成功");
+            return result;
+        } else {
+            result.setCode(500);
+            result.setMessage("插入数据失败");
+            return result;
+        }
     }
 
-    @RequestMapping("insertDoctor")
-    public void insertDoctor(Doctor doctor){
-        doctorService.insertDoctor(doctor);
+    @RequestMapping(value = "delete",method = RequestMethod.POST)
+    public Result doctorDelete(Integer doctorId) {
+        int num = doctorService.deleteDoctor(doctorId);
+        Result result = new Result();
+        if(num > 0) {
+            result.setCode(200);
+            result.setMessage("数据删除成功");
+            return result;
+        } else {
+            result.setCode(500);
+            result.setMessage("数据删除失败");
+            return result;
+        }
     }
 
-    @RequestMapping("deleteDoctorByName")
-    public int deleteDoctorByName(String doctor_name){
-        return doctorService.deleteDoctorByName(doctor_name);
+    @RequestMapping(value = "update",method = RequestMethod.POST)
+    public Result departmentUpdate(@RequestBody Doctor doctor) {
+        int num = doctorService.updateDoctor(doctor);
+        Result result = new Result();
+        if (num > 0) {
+            result.setCode(200);
+            result.setMessage("数据修改成功");
+            return result;
+        } else {
+            result.setCode(500);
+            result.setMessage("数据修改失败");
+            return result;
+        }
     }
 
-    @RequestMapping("updateDoctor")
-    public void updateDoctor(Doctor doctor){
-        doctorService.updateDoctor(doctor);
-    }
-
-    @RequestMapping("findDoctorByName")
-    public Doctor findDoctorByName(String doctor_name){
-        return doctorService.findDoctorByName(doctor_name);
+    @RequestMapping(value = "find",method = RequestMethod.GET)
+    public Result listDoctor() {
+        List<Doctor> doctorList = doctorService.doctorList();
+        Result result = new Result();
+        if (doctorList != null) {
+            result.setCode(200);
+            result.setMessage("查询成功");
+            return result;
+        } else {
+            result.setCode(500);
+            result.setMessage("查询失败");
+            return result;
+        }
     }
 }

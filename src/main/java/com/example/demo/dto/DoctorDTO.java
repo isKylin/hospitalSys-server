@@ -1,9 +1,9 @@
-package com.example.demo.entity;
+package com.example.demo.dto;
 
 import lombok.Data;
 
 @Data
-public class Doctor {
+public class DoctorDTO {
     private Integer doctorId;
     private String doctorName;
     private String doctorDepartment;
